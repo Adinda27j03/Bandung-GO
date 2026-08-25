@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bandung—Go | Lihat Peta</title>
+
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- LEAFLET -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        />
+
+    <!-- CSS UTAMA -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/map.css">
+</head>
+
+<body class="map-page">
+
+
+
+  <!------------------------------------------ NAVBAR ------------------------------------------>
+  <header class="navbar">
+
+      <a class="brand" href="index.html">
+          <span>BANDUNG</span>
+          <i></i>
+          <span>GO</span>
+      </a>
+
+      <nav class="nav-links">
+
+          <a href="index.html#discover">
+              Web Details
+          </a>
+
+          <a href="index.html#places">
+              The Places
+          </a>
+
+          <a href="index.html#gallery">
+              Gallery
+          </a>
+
+          <a href="map.html" class="map-link active">
+              Lihat Peta
+          </a>
+
+      </nav>
+
+  </header>
+
+
+
+  <!------------------------------------------ MAP PAGE ----------------------------------------->
+
+  <main class="map-layout">
+
+    <!------------------------------------ LEFT CONTROL PANEL ----------------------------------->
+    <aside class="map-panel">
+
+        <!----- PANEL HEADER ----->
+        <div class="map-panel-head">
+            <div>
+                <h1>
+                    Find<br>
+                    your<br>
+                    place.
+                </h1>
+            </div>
+        </div>
+
+        <!----- TOOL TABS ----->
+        <div class="tool-tabs">
+
+            <button
+                class="tool-tab active"
+                data-tool="filter">
+
+                <span class="tool-icon">≡</span>
+                <span>Filter</span>
+            </button>
+
+            <button
+                class="tool-tab"
+                data-tool="buffer">
+
+                <span class="tool-icon">◎</span>
+                <span>Stay</span>
+            </button>
+
+            <button
+                class="tool-tab"
+                data-tool="isochrone">
+
+                <span class="tool-icon">◷</span>
+                <span>Explore</span>
+            </button>
+
+        </div>
+
+        <!----- TOOL CONTENT ----->
+        <div class="tool-content">
+
+            <!------------------------------------------------
+            01 FILTER
+            ------------------------------------------------->
+            <section
+                class="tool-section active"
+                id="tool-filter">
+
+                <div class="tool-description">
+
+                    <h2>Explore Bandung.</h2>
+
+                    <p>
+                        Temukan destinasi, tempat makan,
+                        penginapan, dan lokasi menarik
+                        di Bandung.
+                    </p>
+
+                </div>
+
+                <!-- 01 A SEARCH -->
+                <div class="field">
+
+                    <label for="searchPlace">
+                        CARI LOKASI
+                    </label>
+
+                    <div class="search-box">
+
+                        <span>⌕</span>
+
+                        <input
+                            id="searchPlace"
+                            type="search"
+                            placeholder="Cari tempat..."
+                            autocomplete="off">
+
+                    </div>
+                </div>
+
+                <!-- 01 B CATEGORY -->
+                <div class="field category-field">
+
+                    <label>
+                        KATEGORI DESTINASI
+                    </label>
+
+                    <div class="category-tree" id="categoryTree">
+
+                        <label class="radio-option category-all">
+                            <input
+                                type="radio"
+                                name="category"
+                                value="All"
+                                checked>
+
+                            <span class="radio-circle"></span>
+                            <span>Semua Kategori</span>
+                        </label>
+
+                    </div>
+                </div>
+
+                <!-- 01 C BASEMAP -->
+                <div class="field">
+
+                    <label>
+                        BASEMAP
+                    </label>
+
+                    <div class="basemap-list">
+
+                        <button
+                            class="basemap active"
+                            data-map="street">
+
+                            <span class="basemap-preview street-preview"></span>
+                            <strong>Street Mapid</strong>
+                        </button>
+
+                        <button
+                            class="basemap"
+                            data-map="satellite">
+
+                            <span class="basemap-preview satellite-preview"></span>
+                            <strong>Satellite</strong>
+                        </button>
+
+                        <button
+                            class="basemap"
+                            data-map="light">
+
+                            <span class="basemap-preview light-preview"></span>
+                            <strong>Light Mapid</strong>
+                        </button>
+
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!------------------------------------------------
+                  02 STAY
+            ------------------------------------------------->
+            <section
+                class="tool-section"
+                id="tool-buffer">
+
+                <div class="analysis-heading">
+
+                    <span class="analysis-number">
+                        01
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Buffer
+                        </h2>
+
+                        <p>
+                            Cari hotel dan penginapan
+                            terdekat dari sebuah titik
+                            wisata atau lokasi pilihan.
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="field">
+
+                    <label>
+                        TITIK SUMBER
+                    </label>
+
+                    <div class="search-box">
+
+                        <span>⌕</span>
+
+                        <input
+                            id="bufferSearch"
+                            type="search"
+                            placeholder="Ketik nama destinasi...">
+
+                    </div>
+
+                    <button
+                        class="map-pick-button"
+                        id="bufferPick">
+
+                        ⊙ &nbsp; Tandai Titik di Peta
+                    </button>
+
+                </div>
+
+                <div class="or-divider">
+                    <span>ATAU</span>
+                </div>
+
+                <div class="selected-place" id="bufferSelected">
+                    Belum ada titik dipilih
+                </div>
+
+                <div class="field">
+
+                    <div class="field-heading">
+
+                        <label>
+                            RADIUS BUFFER
+                        </label>
+
+                        <strong id="bufferRadiusValue">
+                            1000 m
+                        </strong>
+
+                    </div>
+
+                    <input
+                        type="range"
+                        id="bufferRadius"
+                        min="200"
+                        max="10000"
+                        step="200"
+                        value="1000">
+
+                    <div class="range-labels">
+
+                        <span>200 m</span>
+
+                        <span>10 km</span>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="primary-action"
+                    id="runBuffer">
+
+                    ⌕ &nbsp; Cari Hotel Terdekat
+                </button>
+
+                <button
+                    class="secondary-action"
+                    id="clearBuffer">
+
+                    Bersihkan Analisis
+                </button>
+
+                <div
+                    class="analysis-result"
+                    id="bufferResult">
+
+                    <span class="result-title">
+                        HASIL BUFFER
+                    </span>
+
+                    <strong>
+                        Pilih titik untuk memulai.
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+            <!------------------------------------------------
+                 03 EXPLORE
+            ------------------------------------------------->
+            <section
+                class="tool-section"
+                id="tool-isochrone">
+
+                <div class="analysis-heading">
+
+                    <span class="analysis-number">
+                        02
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Isochrone
+                        </h2>
+
+                        <p>
+                            Lihat destinasi yang dapat
+                            dijangkau dari sebuah hub
+                            transportasi dalam durasi tertentu.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="field">
+
+                    <label>
+                        TITIK SUMBER
+                    </label>
+
+                    <div class="search-box">
+
+                        <span>⌕</span>
+
+                        <input
+                            id="isoSearch"
+                            type="search"
+                            placeholder="Ketik bandara / stasiun...">
+
+                    </div>
+
+                    <button
+                        class="map-pick-button"
+                        id="isoPick">
+
+                        ⊙ &nbsp; Tandai Titik di Peta
+
+                    </button>
+
+                </div>
+
+                <div class="or-divider">
+                    <span>ATAU</span>
+                </div>
+
+                <div class="selected-place" id="isoSelected">
+                    Belum ada titik dipilih
+                </div>
+
+
+                <!-- 03 A MODE -->
+                <div class="field">
+
+                    <label>
+                        MODA TRANSPORTASI
+                    </label>
+
+                    <div class="mode-list">
+
+                        <button
+                            class="mode-button"
+                            data-mode="walking">
+
+                            <span>♟</span>
+                            Jalan
+
+                        </button>
+
+                        <button
+                            class="mode-button active"
+                            data-mode="cycling">
+
+                            <span>♧</span>
+                            Sepeda
+
+                        </button>
+
+                        <button
+                            class="mode-button"
+                            data-mode="driving">
+
+                            <span>▣</span>
+                            Motor/Mobil
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- 03 B DURATION -->
+                <div class="field">
+
+                    <div class="field-heading">
+
+                        <label>
+                            DURASI PERJALANAN
+                        </label>
+
+                        <strong id="isoDurationValue">
+                            30 menit
+                        </strong>
+
+                    </div>
+
+                    <input
+                        type="range"
+                        id="isoDuration"
+                        min="10"
+                        max="90"
+                        step="10"
+                        value="30">
+
+                    <div class="range-labels">
+
+                        <span>10 mnt</span>
+
+                        <span>90 mnt</span>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="primary-action"
+                    id="runIsochrone">
+
+                    ◉ &nbsp; Tampilkan Area Jangkauan
+
+                </button>
+
+                <button
+                    class="secondary-action"
+                    id="clearIsochrone">
+
+                    Bersihkan Analisis
+
+                </button>
+
+                <div
+                    class="analysis-result"
+                    id="isoResult">
+
+                    <span class="result-title">
+                        HASIL ISOCHRONE
+                    </span>
+
+                    <strong>
+                        Pilih titik sumber.
+                    </strong>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- PANEL FOOTER -->
+        <div class="panel-footer">
+
+            <a href="index.html">
+                ← Bandung—Go
+            </a>
+
+            <span>
+                WEBGIS • 2026
+            </span>
+
+        </div>
+
+    </aside>
+
+
+    <!-------------------------------------------- MAP ------------------------------------------->
+    <section class="map-container">
+
+        <div id="map"></div>
+
+
+        <!----- TOP MAP STATUS ----->
+        <div class="map-status">
+
+            <div class="status-count">
+
+                <span>
+
+                    <i class="status-dot tourism"></i>
+
+                    <b id="tourismCount">
+                        0
+                    </b>
+
+                    Wisata
+
+                </span>
+
+                <span>
+
+                    <i class="status-dot hotel"></i>
+
+                    <b id="hotelCount">
+                        0
+                    </b>
+
+                    Hotel
+
+                </span>
+
+                <span>
+
+                    <i class="status-dot transport"></i>
+
+                    <b id="transportCount">
+                        0
+                    </b>
+
+                    Transport
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!----- TOP RESULT TOAST ----->
+        <div
+            class="map-toast"
+            id="mapToast">
+
+            Menampilkan semua destinasi Bandung
+
+        </div>
+
+
+
+    <!-------------------------------------- MAP LAYERS RIGHT ------------------------------------->
+        <div class="map-layers">
+
+            <div class="layers-head">
+
+                <strong>
+                    TAMPILKAN LAYER
+                </strong>
+
+                <button type="button" id="layersToggle">
+                    ⌄
+                </button>
+
+            </div>
+
+
+            <div
+                class="layers-body"
+                id="layersBody">
+
+
+                <!-- 01 DESTINASI WISATA -->
+                <div class="map-layer-item">
+
+                    <div class="map-layer-name">
+
+                        <span class="map-layer-icon tourism">
+                            
+                        </span>
+
+                        <span>
+                            Destinasi Wisata
+                        </span>
+
+                    </div>
+
+                    <label class="layer-switch">
+
+                        <input
+                            type="checkbox"
+                            id="mapToggleTourism"
+                            checked>
+
+                        <span>
+                            <i></i>
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- 02 HOTEL DAN PENGINAPAN -->
+                <div class="map-layer-item">
+
+                    <div class="map-layer-name">
+
+                        <span class="map-layer-icon hotel">
+                            
+                        </span>
+
+                        <span>
+                            Hotel & Penginapan
+                        </span>
+
+                    </div>
+
+                    <label class="layer-switch">
+
+                        <input
+                            type="checkbox"
+                            id="mapToggleHotel">
+
+                        <span>
+                            <i></i>
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- 03 TRANSPORTASI -->
+                <div class="map-layer-item">
+
+                    <div class="map-layer-name">
+
+                        <span class="map-layer-icon transport">
+                            
+                        </span>
+
+                        <span>
+                            Hub Transportasi
+                        </span>
+
+                    </div>
+
+                    <label class="layer-switch">
+
+                        <input
+                            type="checkbox"
+                            id="mapToggleTransport">
+
+                        <span>
+                            <i></i>
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- 04 BATAS ADMINITRASI -->
+                <div class="map-layer-item">
+
+                    <div class="map-layer-name">
+
+                        <span class="map-layer-icon admin">
+                            
+                        </span>
+
+                        <span>
+                            Batas Administrasi
+                        </span>
+
+                    </div>
+
+                    <label class="layer-switch">
+
+                        <input
+                            type="checkbox"
+                            id="mapToggleAdmin"
+                            checked>
+
+                        <span>
+                            <i></i>
+                        </span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    <!------------------------------------------ LEGENDA ------------------------------------------>
+    <div class="map-legend">
+        <div class="legend-head">
+            <strong>LEGENDA</strong>
+            <button type="button" id="legendToggle">⌃</button>
+        </div>
+
+        
+        <div class="legend-body" id="legendBody">
+
+            <div class="legend-item">
+                <div class="legend-marker nature" style="--marker-color:#f2a900">
+                    <i class="fa-solid fa-mountain-sun"></i>
+                </div>
+                <span>Wisata Alam</span>
+            </div>
+
+            <div class="legend-item">
+                <div class="legend-marker culture" style="--marker-color:#7d4b91">
+                    <i class="fa-solid fa-landmark"></i>
+                </div>
+                <span>Wisata Budaya</span>
+            </div>
+
+            <div class="legend-item">
+                <div class="legend-marker" style="--marker-color:#d9783a; background:#d9783a;">
+                    <i class="fa-solid fa-shop"></i>
+                </div>
+                <span>Cafe</span>
+            </div>
+
+            <div class="legend-item">
+                <div class="legend-marker coffee" style="--marker-color:#9b6b2e">
+                    <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <span>Coffee Shop</span>
+            </div>
+
+            <div class="legend-item">
+                <div class="legend-marker restaurant" style="--marker-color:#f47a1f">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+                <span>Restaurant</span>
+            </div>
+
+            <div class="legend-item">
+                <div class="legend-marker" style="--marker-color:#e05a33; background:#e05a33;">
+                    <i class="fa-solid fa-burger"></i>
+                </div>
+                <span>Fast Food Restaurant</span>
+            </div>
+
+            <div class="legend-item">
+                <div class="legend-marker" style="--marker-color:#c48a3a; background:#c48a3a;">
+                    <i class="fa-solid fa-bread-slice"></i>
+                </div>
+                <span>Bakery</span>
+            </div>
+
+            <div class="legend-item">
+                <div class="legend-marker" style="--marker-color:#7c5a3a; background:#7c5a3a;">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+                <span>Food Court</span>
+            </div>
+
+            <div class="legend-item">
+                <div class="legend-marker hotel" style="--marker-color:#4f9187">
+                    <i class="fa-solid fa-bed"></i>
+                </div>
+                <span>Hotel &amp; Penginapan</span>
+            </div>
+
+            <div class="legend-item">
+                <div class="legend-marker transport" style="--marker-color:#6b6b6b">
+                    <i class="fa-solid fa-bus"></i>
+                </div>
+                <span>Transportasi</span>
+            </div>
+
+            <div class="legend-divider"></div>
+
+            <div class="legend-item legend-admin">
+                <span class="admin-line"></span>
+                <span>Batas Administrasi Kota</span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!------------------------------------- MAP MOBILE BUTTON ------------------------------------>
+        <button
+            class="open-panel-button"
+            id="openPanel">
+
+            ☰ &nbsp; Tools
+
+        </button>
+
+    </section>
+
+</main>
+
+
+
+
+<!------------------------------------------ LEAFLET ------------------------------------------>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+<!-- MAPLIBRE GL -->
+<script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+
+<!-- MAPLIBRE GL FOR LEAFLET -->
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.1.3/leaflet-maplibre-gl.js"></script>
+
+<!-- TURF: BUFFER & SPATIAL QUERY -->
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"></script>
+
+<!-- LEAFLET MARKER CLUSTER -->
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+
+<!----------------------------------------- JAVASCRIPT ----------------------------------------->
+<script src="js/config.js"></script>
+<script src="js/map.js"></script>
+
+</body>
+</html>
