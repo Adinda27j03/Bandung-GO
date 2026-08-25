@@ -24,3 +24,25 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     }
   });
 });
+
+const menuToggle = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector(".nav-links");
+
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("mobile-open");
+
+    const isOpen = navLinks.classList.contains("mobile-open");
+
+    menuToggle.setAttribute("aria-expanded", isOpen);
+    menuToggle.textContent = isOpen ? "✕" : "☰";
+  });
+
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("mobile-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.textContent = "☰";
+    });
+  });
+}

@@ -3830,3 +3830,21 @@ $("openPanel")?.addEventListener(
   );
 
 })();
+
+
+
+const mapPanel = document.querySelector(".map-panel");
+const openPanelButton = document.querySelector(".open-panel-button");
+const panelClose = document.querySelector(".panel-close");
+
+if (mapPanel && openPanelButton) {
+  openPanelButton.addEventListener("click", () => {
+    mapPanel.classList.add("open");
+  });
+}
+
+if (mapPanel && panelClose) {
+  panelClose.addEventListener("click", () => {
+    mapPanel.classList.remove("open");
+  });
+}

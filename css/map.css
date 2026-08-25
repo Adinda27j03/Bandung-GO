@@ -1980,20 +1980,15 @@ input[type="range"]::-moz-range-thumb{
 
         @media(max-width:760px){
 
-        .map-layout{
-            height:auto;
-            min-height:100vh;
-            grid-template-columns:1fr;
-        }
+            .map-layout{
+                height:100svh;
+                min-height:100svh;
+            }
 
-        .map-panel{
-            min-height:360px;
-        }
-
-        #map{
-            height:65vh;
-            min-height:470px;
-        }
+            #map{
+                height:calc(100svh - 40px);
+                min-height:0;
+            }
 
         }
 
