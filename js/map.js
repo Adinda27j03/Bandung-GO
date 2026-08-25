@@ -3713,6 +3713,10 @@ setupCollapsiblePanel(
 );
 
 
+$("layersBody")?.classList.add(
+  "collapsed"
+);
+
 $("legendBody")?.classList.add(
   "collapsed"
 );
@@ -3779,8 +3783,16 @@ $("openPanel")?.addEventListener(
   "click",
   () =>
     document
-      .querySelector(".map-panel")
+     .querySelector(".map-panel")
       ?.classList.toggle("open")
+);
+
+$("closePanel")?.addEventListener(
+  "click",
+  () =>
+    document
+      .querySelector(".map-panel")
+      ?.classList.remove("open")
 );
 
 
@@ -3830,21 +3842,3 @@ $("openPanel")?.addEventListener(
   );
 
 })();
-
-
-
-const mapPanel = document.querySelector(".map-panel");
-const openPanelButton = document.querySelector(".open-panel-button");
-const panelClose = document.querySelector(".panel-close");
-
-if (mapPanel && openPanelButton) {
-  openPanelButton.addEventListener("click", () => {
-    mapPanel.classList.add("open");
-  });
-}
-
-if (mapPanel && panelClose) {
-  panelClose.addEventListener("click", () => {
-    mapPanel.classList.remove("open");
-  });
-}

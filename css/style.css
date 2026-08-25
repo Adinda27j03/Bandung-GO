@@ -836,132 +836,62 @@ a{color:inherit}
 
 @media(max-width:760px){
 
-.navbar{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:50px;
-
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 50px;
-
-  background:var(--orange);
-  z-index:9999;
-}
-
-.brand{
-  height:50px;
-  padding:0 15px;
-  font-size:20px;
-}
-
-.brand i{
-  width:45px;
-}
-
-.nav-links{
-  display:none;
-}
-
-.menu-toggle{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  width:50px;
-  height:50px;
-
-  padding:0;
-  border:0;
-
-  background:var(--orange);
-  color:#111;
-
-  font-size:24px;
-  cursor:pointer;
-
-  position:relative;
-  z-index:10001;
-}
-
-/* MENU SAAT DIBUKA */
-.navbar.mobile-open .nav-links{
-  position:absolute;
-
-  top:50px;
-  left:0;
-  right:0;
-
-  display:flex;
-  flex-direction:column;
-
-  width:100%;
-  height:auto;
-
-  background:var(--orange);
-
-  box-shadow:0 12px 20px rgba(0,0,0,.12);
-
-  z-index:10000;
-  }
-
-  .navbar.mobile-open .nav-links a{
-    width:100%;
-    height:58px;
-
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-
-    padding:0 20px;
-
-    font-size:16px;
-
-    border-top:1px solid rgba(0,0,0,.15);
-  }
-
-  .navbar.mobile-open .nav-links a:hover{
-    background:#111;
-    color:var(--orange);
-  }
-
   .navbar{
     position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:50px;
+    grid-template-columns:minmax(0,1fr) 50px;
     z-index:9999;
   }
 
+  .brand{
+    height:50px;
+    padding:0 15px;
+    font-size:20px;
+  }
+
+  .nav-links,
+  .nav-about{
+    display:none;
+  }
+
   .menu-toggle{
-    width:40px;
-    height:38px;
     display:flex;
     align-items:center;
     justify-content:center;
+    width:50px;
+    height:50px;
+    padding:0;
+    border:0;
+    background:var(--orange);
+    font-size:24px;
     cursor:pointer;
     position:relative;
     z-index:10001;
   }
 
-  .nav-links.mobile-open{
-    display:flex;
+  .navbar.mobile-open .nav-links{
     position:absolute;
-    top:38px;
+    top:50px;
     left:0;
     width:100%;
-    height:auto;
+    display:flex;
     flex-direction:column;
     background:var(--orange);
-    border-bottom:1px solid #111;
+    box-shadow:0 12px 20px rgba(0,0,0,.12);
+    z-index:10000;
   }
 
-  .nav-links.mobile-open a{
+  .navbar.mobile-open .nav-links a{
     width:100%;
-    min-height:52px;
-    height:auto;
+    height:56px;
+    display:flex;
+    align-items:center;
     justify-content:flex-start;
     padding:0 20px;
-    border-bottom:1px solid rgba(0,0,0,.2);
-    font-size:16px;
+    border-top:1px solid rgba(0,0,0,.15);
   }
 
   .menu-section{
@@ -973,70 +903,31 @@ a{color:inherit}
   }
 
   .menu-media{
-  height:calc(100svh - 100px);
-  min-height:500px;
-  max-height:750px;
+    height:72vh;
+    min-height:520px;
   }
 
   .menu-overlay-title{
-  right:15px;
-  left:15px;
-  top:auto;
-  bottom:190px;
-  width:auto;
-  max-width:none;
-
-  font-size:clamp(30px, 9vw, 42px);
-  line-height:.85;
-
-  text-align:left;
-  text-align-last:auto;
-  }
-
-  .menu-action{
-  left:15px;
-  right:15px;
-  bottom:20px;
-  width:auto;
-  gap:16px;
+    right:10px;
+    top:40%;
+    max-width:72%;
+    font-size:34px;
   }
 
   .menu-small.right{
-    width:100%;
-    font-size:13px;
-    line-height:1.4;
-  }
-
-  .menu-small.left{
-    left:15px;
-    bottom:145px;
-    font-size:14px;
+    width:55%;
+    right:12px;
   }
 
   .menu-map-button{
-    width:100%;
-    height:52px;
-    font-size:17px;
-  } 
+    left:15px;
+    right:15px;
+    text-align:center;
+    bottom:15px;
+  }
 
   .green-section{
-  min-height:auto;
-  padding-top:70px;
-  padding-bottom:70px;
-  }
-
-  .green-section h2{
-  font-size:clamp(42px, 12vw, 70px);
-  line-height:.85;
-  }
-
-  .green-description{
-    width:calc(100% - 30px);
-    max-width:none;
-    margin-left:auto;
-    margin-right:auto;
-    font-size:14px;
-    line-height:1.55;
+    min-height:1050px;
   }
 
   .green-feature{
@@ -1055,19 +946,7 @@ a{color:inherit}
   }
 
   .lineup-section{
-  min-height:600px;
-  }
-
-  .lineup-copy{
-  width:calc(100% - 30px);
-  left:15px;
-  right:15px;
-  bottom:30px;
-  }
-
-  .lineup-copy p{
-    font-size:14px;
-    line-height:1.5;
+    min-height:720px;
   }
 
   .lineup-heading{
@@ -1094,10 +973,6 @@ a{color:inherit}
     white-space:nowrap;
   }
 
-  /* ================================
-   GALLERY MOBILE
-  ================================ */
-
   .gallery-section{
     padding:60px 15px;
   }
@@ -1107,30 +982,18 @@ a{color:inherit}
     margin-bottom:25px;
   }
 
-  .gallery-header h2{
-    font-size:clamp(55px, 16vw, 85px);
-    line-height:.8;
-  }
-
   .gallery-grid{
     position:relative;
-
     display:grid;
-
     grid-template-columns:1fr 1fr;
-
     gap:10px;
-
     width:100%;
-
     min-height:0;
-
     margin:0;
   }
 
   .gallery-item{
     position:relative;
-
     width:100%;
     left:auto;
     right:auto;
@@ -1138,62 +1001,41 @@ a{color:inherit}
     bottom:auto;
   }
 
-  /* FOTO BESAR */
   .gallery-main{
     grid-column:1 / -1;
-
     width:100%;
     height:330px;
   }
 
-  /* FOTO POTRAIT */
   .gallery-portrait{
     width:100%;
-    height:300px;
+    height:280px;
   }
 
-  /* FOTO KECIL */
-  .gallery-small-one{
-    width:100%;
-    height:180px;
-  }
-
-  /* FOTO KECIL */
+  .gallery-small-one,
   .gallery-small-two{
     width:100%;
     height:180px;
   }
 
-  /* FOTO LANDSCAPE */
   .gallery-landscape{
     grid-column:1 / -1;
-
     width:100%;
     height:220px;
   }
 
-  /* DESKRIPSI */
   .gallery-purpose{
     position:relative;
-
     grid-column:1 / -1;
-
     width:100%;
-
     top:auto;
     right:auto;
     left:auto;
     bottom:auto;
-
     padding:20px 5px 0;
-
     text-align:left;
   }
 
-  .gallery-purpose p{
-    font-size:15px;
-    line-height:1.6;
-  }
   .footer-contact{
     display:block;
   }

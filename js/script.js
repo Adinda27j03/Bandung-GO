@@ -2,43 +2,21 @@ const menu = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".navbar");
 
 if (menu && nav) {
-
   menu.addEventListener("click", () => {
-
     if (window.innerWidth > 760) return;
-
     nav.classList.toggle("mobile-open");
-
-    const isOpen =
-      nav.classList.contains("mobile-open");
-
+    const isOpen = nav.classList.contains("mobile-open");
     menu.textContent = isOpen ? "✕" : "☰";
-
-    menu.setAttribute(
-      "aria-expanded",
-      String(isOpen)
-    );
-
+    menu.setAttribute("aria-expanded", String(isOpen));
   });
 
-  nav.querySelectorAll(".nav-links a")
-    .forEach(link => {
-
-      link.addEventListener("click", () => {
-
-        nav.classList.remove("mobile-open");
-
-        menu.textContent = "☰";
-
-        menu.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-
-      });
-
+  nav.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("mobile-open");
+      menu.textContent = "☰";
+      menu.setAttribute("aria-expanded", "false");
     });
-
+  });
 }
 
 document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -51,25 +29,3 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     }
   });
 });
-
-const menuToggle = document.querySelector(".menu-toggle");
-const navLinks = document.querySelector(".nav-links");
-
-if (menuToggle && navLinks) {
-  menuToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("mobile-open");
-
-    const isOpen = navLinks.classList.contains("mobile-open");
-
-    menuToggle.setAttribute("aria-expanded", isOpen);
-    menuToggle.textContent = isOpen ? "✕" : "☰";
-  });
-
-  navLinks.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      navLinks.classList.remove("mobile-open");
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.textContent = "☰";
-    });
-  });
-}
