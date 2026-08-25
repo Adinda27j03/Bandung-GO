@@ -3713,10 +3713,6 @@ setupCollapsiblePanel(
 );
 
 
-$("layersBody")?.classList.add(
-  "collapsed"
-);
-
 $("legendBody")?.classList.add(
   "collapsed"
 );
@@ -3783,16 +3779,8 @@ $("openPanel")?.addEventListener(
   "click",
   () =>
     document
-     .querySelector(".map-panel")
-      ?.classList.toggle("open")
-);
-
-$("closePanel")?.addEventListener(
-  "click",
-  () =>
-    document
       .querySelector(".map-panel")
-      ?.classList.remove("open")
+      ?.classList.toggle("open")
 );
 
 
