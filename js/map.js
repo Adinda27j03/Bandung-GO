@@ -586,93 +586,65 @@ async function loadLayer(layerName, categoryName) {
 
   const source = CONFIG.layers?.[layerName];
 
-
-  if (
-    !source ||
-    !source.enabled ||
-    !source.url
-  ) {
-
-    console.warn(
-      `Layer ${layerName} tidak aktif atau URL kosong`
-    );
-
+  if (!source?.enabled || !source?.url) {
     return [];
-
   }
 
+  const allFeatures = [];
+  const limit = 200;
+  let skip = 0;
 
-  try {
+  while (true) {
 
-    console.log(
-      `Memuat MAPID layer: ${layerName}`
-    );
+    const separator = source.url.includes("?")
+      ? "&"
+      : "?";
 
+    const url =
+      `${source.url}${separator}limit=${limit}&skip=${skip}`;
 
-    const response = await fetch(
-      source.url,
-      {
-        method: "GET"
-      }
-    );
-
+    const response = await fetch(url, {
+      method: "GET"
+    });
 
     if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+      throw new Error(
+        `Gagal mengambil data ${layerName}: ${response.status}`
+      );
     }
-
 
     const payload = await response.json();
 
     const features = extractFeatures(payload);
 
-
-    if (
-      layerName === "tourism" &&
-      features.length
-    ) {
-
-      console.log(
-        "Contoh Attribute Table Tourism:",
-        features[0].properties || features[0]
-      );
-
+    if (!features.length) {
+      break;
     }
 
+    allFeatures.push(...features);
 
-    const loaded = features
-      .map(
-        item =>
-          normalizePlace(
-            item,
-            categoryName
-          )
-      )
-      .filter(Boolean);
+    if (features.length < limit) {
+      break;
+    }
 
-
-    console.log(
-      `${layerName} berhasil dimuat:`,
-      loaded.length,
-      "titik"
-    );
-
-
-    return loaded;
-
+    skip += limit;
   }
 
-  catch (error) {
+  const loaded = allFeatures
+    .map(
+      item =>
+        normalizePlace(
+          item,
+          categoryName
+        )
+    )
+    .filter(Boolean);
 
-    console.error(
-      `MAPID load error (${layerName}):`,
-      error
-    );
+  console.log(
+    `${layerName}: ${loaded.length} data berhasil dimuat`
+  );
 
-    return [];
-
-  }
-
+  return loaded;
 }
 
 
