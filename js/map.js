@@ -657,7 +657,7 @@ async function loadLayer(layerName, categoryName) {
 
 async function loadPlaces() {
 
-  showToast("Memuat data dari MAPID...");
+  showToast("Memuat Data Dari MAPID...");
 
     const results = await Promise.all([
 
@@ -756,7 +756,7 @@ async function loadPlaces() {
   if (!places.length) {
 
     showToast(
-      "Tidak ada data yang berhasil dimuat dari MAPID"
+      "Tidak Ada Data yang Berhasil Dimuat Dari MAPID"
     );
 
     return;
@@ -765,7 +765,7 @@ async function loadPlaces() {
 
 
   showToast(
-    `${places.length} titik berhasil dimuat dari MAPID`
+    `${places.length} Titik Berhasil Dimuat Dari MAPID`
   );
 
 }
@@ -1308,7 +1308,7 @@ function addPlaceMarker(place) {
 
 
             showToast(
-              `${target.name} menjadi titik sumber buffer`
+              `${target.name} Menjadi Titik Sumber Buffer`
             );
 
           }
@@ -1700,7 +1700,7 @@ async function loadAdminBoundaries() {
       );
 
       showToast(
-        "Data batas kecamatan tidak valid"
+        "Data Batas Kecamatan Tidak Valid"
       );
 
       return;
@@ -1923,7 +1923,7 @@ async function loadAdminBoundaries() {
     );
 
     showToast(
-      "Gagal memuat batas kecamatan"
+      "Gagal Memuat Batas Kecamatan"
     );
 
   }
@@ -2026,7 +2026,7 @@ $("searchPlace")?.addEventListener(
 
     else {
 
-      showToast("Lokasi tidak ditemukan");
+      showToast("Lokasi Tidak Ditemukan");
 
     }
 
@@ -2548,7 +2548,7 @@ $("bufferSearch")?.addEventListener(
 
     else {
 
-      showToast("Lokasi tidak ditemukan");
+      showToast("Lokasi Tidak Ditemukan");
 
     }
 
@@ -2568,7 +2568,7 @@ $("runBuffer")?.addEventListener(
     if (!bufferPoint) {
 
       return showToast(
-        "Pilih titik sumber terlebih dahulu"
+        "Pilih Titik Sumber Terlebih Dahulu"
       );
 
     }
@@ -2577,7 +2577,7 @@ $("runBuffer")?.addEventListener(
     if (!window.turf) {
 
       return showToast(
-        "Turf.js belum termuat"
+        "Turf.js Belum Termuat"
       );
 
     }
@@ -2795,7 +2795,7 @@ $("runBuffer")?.addEventListener(
 
     /* TOAST */
     showToast(
-      `${nearbyHotels.length} hotel berada dalam area buffer`
+      `${nearbyHotels.length} Hotel Berada Dalam Area Buffer`
     );
 
   }
@@ -2824,7 +2824,7 @@ $("clearBuffer")?.addEventListener(
     if ($("bufferSelected")) {
 
       $("bufferSelected").textContent =
-        "Belum ada titik dipilih";
+        "Belum Ada Titik Dipilih";
 
       $("bufferSelected").classList.remove(
         "selected"
@@ -2842,7 +2842,7 @@ $("clearBuffer")?.addEventListener(
           </span>
 
           <strong>
-            Pilih titik untuk memulai.
+            Pilih Titik Untuk Memulai.
           </strong>
         `;
 
@@ -2968,7 +2968,7 @@ $("isoPick")?.addEventListener(
     if (isoPickMode) {
 
       showToast(
-        "Klik lokasi di peta untuk titik isochrone"
+        "Klik Lokasi di Peta Untuk Titik Isochrone"
       );
 
     }
@@ -3026,7 +3026,7 @@ $("isoSearch")?.addEventListener(
     else {
 
       showToast(
-        "Hub transportasi tidak ditemukan"
+        "Hub Transportasi Tidak Ditemukan"
       );
 
     }
@@ -3110,7 +3110,7 @@ $("runIsochrone")?.addEventListener(
     if (!isoPoint) {
 
       return showToast(
-        "Pilih titik sumber terlebih dahulu"
+        "Pilih Titik Sumber Terlebih Dahulu"
       );
 
     }
@@ -3141,7 +3141,7 @@ $("runIsochrone")?.addEventListener(
 
 
       return showToast(
-        "ORS API key belum diisi"
+        "ORS API Key Belum Diisi"
       );
 
     }
@@ -3434,7 +3434,7 @@ if ($("isoResult")) {
 
 
       showToast(
-        "Area isochrone berhasil ditampilkan"
+        "Area Isochrone Berhasil Ditampilkan"
       );
 
     }
@@ -3465,7 +3465,7 @@ if ($("isoResult")) {
 
 
       showToast(
-        "Isochrone gagal dimuat"
+        "Isochrone Gagal Dimuat"
       );
 
     }
@@ -3528,7 +3528,7 @@ $("clearIsochrone")?.addEventListener(
     if ($("isoSelected")) {
 
       $("isoSelected").textContent =
-        "Belum ada titik dipilih";
+        "Belum Ada Titik Dipilih";
 
       $("isoSelected").classList.remove(
         "selected"
